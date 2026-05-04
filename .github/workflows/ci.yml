@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  compile:
+    name: Python compile check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile pipeline modules
+        run: python -m py_compile pipeline/*.py
+
+      - name: Validate config template parses as YAML
+        run: |
+          python -c "import yaml; yaml.safe_load(open('config/client.yaml'))"
