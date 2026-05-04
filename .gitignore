@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Output (client-specific generated files)
+output/*/
+output/*.png
+output/*.jpg
+
+# Secrets
+.env
+.env.local
+.env.*
+!.env.local.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.cursor/
+.idea/
+
+# MCP config with bearer token
+.mcp.json

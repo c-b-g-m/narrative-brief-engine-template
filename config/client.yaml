@@ -1,0 +1,72 @@
+# Client configuration template
+# Copy this file to {client-slug}.yaml and customize. The {client-slug} you choose
+# is what you pass to the pipeline scripts (e.g., python3 pipeline/stage1_archive_mine.py acme).
+
+# ─── CLIENT (the recipient of the brief) ───────────────────────────────
+client_name: ""
+industry: ""
+target_buyer: ""  # "Name, Title" — e.g. "Jane Doe, CMO"
+
+# Companies to exclude from prospect list (direct competitors of the client)
+competitors: []
+
+# Known customers of the client — auto-excluded from the final prospect list
+# so existing accounts don't show up. Populate before running Stage 2.
+known_customers: []
+
+# ─── YOUR FIRM (the brief sender) ──────────────────────────────────────
+# Used in hero header + footer attribution. If unset, falls back to client_name.
+brand_name: ""
+brand_url: ""  # optional, full URL — e.g. "https://www.acmecorp.com"
+
+# Column-3 header on the signal panel. Default "Solution" if unset.
+# Examples: "Acme Solution", "How We Help", "Our Offering"
+solution_label: ""
+
+# ─── DISCOVERY (Stage 1: archive mining) ───────────────────────────────
+# Search angles must be defined per client. The skill will prompt for angles
+# relevant to the client's industry, product, and positioning.
+# Example angles (do NOT use as defaults):
+#   - "hiring for taste and judgment"
+#   - "AI transformation in fintech"
+#   - "skills that can't be measured in healthcare"
+search_angles: []
+
+# ─── CLUSTERS (Stage 2: synthesis) ─────────────────────────────────────
+# Leave empty to discover from archive signals. After Stage 1 the skill
+# proposes clusters, pauses for your review, then populates this section.
+#
+# Format once established:
+#   cluster_key:
+#     title: "Display Title"
+#     thesis: "One-sentence thesis for this cluster"
+#     tags: ["keyword1", "keyword2"]
+clusters: {}
+
+# Maps cluster_key → solution string. Renders in column 3 of the signal panel.
+# Format: cluster_key: "Product name + brief description"
+solution_mapping: {}
+
+# Accounts must have a topic-relevant signal after this date (YYYY-MM-DD).
+recency_cutoff: ""
+
+# ─── BUYING COMMITTEE (Stage 2b) ───────────────────────────────────────
+buying_committee:
+  roles: [ceo, cfo, chro, signal_source]
+  # Map non-canonical company names to canonical ones (e.g., legal names → trading names)
+  company_aliases: {}
+
+# ─── APIFY (Stage 3: LinkedIn research) ────────────────────────────────
+apify:
+  posts_actor: "harvestapi/linkedin-profile-posts"
+  max_posts_per_profile: 10
+
+# ─── FRAMING (Stage 5: header copy) ────────────────────────────────────
+# Written AFTER clusters are established (framing positions the artifact).
+# The skill pauses for you to write or approve framing before Stage 5 builds the HTML.
+framing:
+  title: ""
+  subtitle: ""
+  paragraphs: []
+
+footer: "Built with narrative intelligence."
